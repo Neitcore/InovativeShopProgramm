@@ -1,0 +1,141 @@
+
+WindowManager:
+    MainWindow:
+    CardsWindow:
+    AddCardWindow:
+    BonusWindow:
+    
+<MainWindow>:
+    name: "Main"
+    FloatLayout:
+        Button:
+            size_hint: 1, 0.33
+            pos_hint: {"top":1}
+            text: "Manas kartes"
+            on_release:
+                app.root.current = "Cards"
+                root.manager.transition.direction = "left"
+                
+        Button:
+            size_hint: 1, 0.33
+            pos_hint: {"top":0.665}
+            text: "Pievienot jauno karti"
+            on_release:
+                app.root.current = "AddCard"
+                root.manager.transition.direction = "left"
+        Button:
+            size_hint: 1, 0.33 
+            pos_hint: {"top":0.33}
+            text: "Pieejamās akcijas"
+            on_release:
+                app.root.current = "Bonus"
+                root.manager.transition.direction = "left"
+        
+        
+<CardsWindow>:
+    mainContainer: mainContainerID
+    name: "Cards"
+    GridLayout:
+        cols: 1
+        Label:
+            size_hint: 1, 0.10
+            pos_hint: {"top":1}
+            text: "Manas kartes"
+            
+        GridLayout:
+            id: mainContainerID
+            cols: 1
+        
+
+            
+        Button:
+            size_hint: 0.33, 0.10
+            pos_hint: {"x":0.5 - 0.33/2,"top":0.1}
+            text: "Atpakaļ"
+            on_release:
+                app.root.current = "Main"
+                root.manager.transition.direction = "right"
+            
+    
+<AddCardWindow>:
+    shopName: ShopNameID
+    expireDate: ExpireDateID
+    barcode: BarcodeID
+    quickreadcode: quickreadcodeCodeID
+    bonus :BonusID
+    
+    name: "AddCard"
+    GridLayout:
+        cols: 1
+        GridLayout:
+            cols: 2
+            Label:
+                text: "Veikala nosaukums"
+            TextInput:
+                id: ShopNameID
+                multiline: False
+
+            Label:
+                text: "Beiguma termiņš"
+            TextInput:
+                id: ExpireDateID
+                multiline: False
+
+            Label:
+                text: "Barcode"
+            TextInput:
+                id: BarcodeID
+                multiline: False
+
+            Label:
+                text: "QR Code"
+            TextInput:
+                id: quickreadcodeCodeID
+                multiline: False
+
+            Label:
+                text: "Bonusi"
+            TextInput:
+                id: BonusID
+                multiline: False
+        Label:
+            size_hint: 0.25, 1e-2
+            text: ""
+            
+        Button:
+            size_hint: 0.25, 0.10
+            text: "Pievienot karti"
+            on_press:
+                root.addCard()
+            
+        Label:
+            size_hint: 0.25, 1e-5
+            text: ""
+            
+        Button:
+            text: "Atpakaļ"
+            size_hint: 0.25, 0.10
+            on_release:
+                app.root.current = "Main"
+                root.manager.transition.direction = "right"
+            
+    
+<BonusWindow>:
+    name: "Bonus"
+    GridLayout:
+        cols: 1
+        Label:
+            text: "Pieejamās akcijas"
+            size_hint: 0.33, 0.10
+        GridLayout:
+            cols: 1
+            Label:
+                text: "Nav pieejamās akcijas"
+        Button:
+            id: bonusBack
+            size_hint: 0.33, 0.10
+            text: "Atpakaļ"
+            on_release:
+                app.root.current = "Main"
+                root.manager.transition.direction = "right"
+
